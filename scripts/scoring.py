@@ -3,21 +3,17 @@ import numpy as np
 import pandas as pd
 import torch
 import dgl
-import joblib
 from rdkit import Chem
 from ligand_features import LigandFeature
 from load_receptor import ReceptorFile
 from pocket_features import PocketFeatures
 from cplx_graph import ComplexGraph
-from dgl.data.utils import save_graphs
 from dgl.dataloading import GraphDataLoader
 from model import *
 from torch.utils.data import DataLoader, Dataset
 from utils import run_an_eval_epoch, sdf_split, mol2_split
 from argparse import RawDescriptionHelpFormatter
 import argparse
-import random
-import time
 
 class MyDataset(Dataset):
     def __init__(self, rec_gs, cplx_gs):
