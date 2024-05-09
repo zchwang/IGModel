@@ -33,7 +33,7 @@ class PocketFeatures():
         # Calculate the angle between the two normal vectors
         cos_angle = torch.dot(n1, n2) / (torch.norm(n1) * torch.norm(n2))
         dihedral_angle = torch.acos(cos_angle)
-        dihedral_angle = torch.where(torch.isnan(dihedral_angle), 0.0, dihedral_angle)      
+        dihedral_angle = torch.where(torch.isnan(dihedral_angle), torch.tensor(0.0), dihedral_angle)      
 
         # Determine the sign of the dihedral angle
         sign = torch.sign(torch.dot(n1, b2))
