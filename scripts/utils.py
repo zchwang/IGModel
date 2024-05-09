@@ -245,7 +245,7 @@ def cal_angle_between_vectors(u, v):
     res = torch.sum(u * v, axis=1) / (u_norm * v_norm)
     angle = torch.acos(res)
 
-    angle = torch.where(torch.isnan(angle), 0.0, angle)
+    angle = torch.where(torch.isnan(angle), torch.tensor(0.0), angle)
 
     return angle
 
@@ -267,7 +267,7 @@ def cal_dihedral_anlge(vec_1, vec_2, vec_3):
     norm_2 = torch.linalg.norm(n2, dim=1)
 
     angle = torch.acos(torch.sum(n1 * n2, axis=1) / (norm_1 * norm_2))
-    angle = torch.where(torch.isnan(angle), 0.0, angle)
+    angle = torch.where(torch.isnan(angle), torch.tensor(0.0), angle)
 
     sign = torch.sign(torch.sum(n1 * vec_3, axis=1))
     angle *= sign
