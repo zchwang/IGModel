@@ -52,7 +52,7 @@ You can also directly run "./run_scoring.sh" to test the script. We also provide
 
 ### 4. Create pocket graph and protein-ligand interaction graph
 	$python scripts/generate_features.py \
-	-pose_fpath samples/1bcu_decoys3.sdf \
+	-pose_fpath samples/1bcu/1bcu_decoys.sdf \
 	-code 1bcu \
 	-rec_fpath samples/1bcu/1bcu_protein_atom_noHETATM.pdb \
 	-ref_lig_fpath samples/1bcu/1bcu_ligand.sdf \
