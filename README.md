@@ -17,17 +17,16 @@ Zechen Wang, PhD, Shandong University, wangzch97@163.com</p>
 ## Citation
 If you find our scripts useful, please consider citing the following paper:
 
-	@article {Wang2023.11.01.565115,
-		author = {Zechen Wang and Sheng Wang and Yangyang Li and Jingjing Guo and Yanjie Wei and Yuguang Mu and Liangzhen Zheng and Weifeng Li},
-		title = {A New Paradigm for Applying Deep Learning to Protein-Ligand Interaction Prediction},
-		elocation-id = {2023.11.01.565115},
-		year = {2023},
-		doi = {10.1101/2023.11.01.565115},
-		publisher = {Cold Spring Harbor Laboratory},
-		URL = {https://www.biorxiv.org/content/early/2023/11/03/2023.11.01.565115},
-		eprint = {https://www.biorxiv.org/content/early/2023/11/03/2023.11.01.565115.full.pdf},
-		journal = {bioRxiv}
-	}
+	@article{wang2024new,
+		  title={A new paradigm for applying deep learning to protein--ligand interaction prediction},
+		  author={Wang, Zechen and Wang, Sheng and Li, Yangyang and Guo, Jingjing and Wei, Yanjie and Mu, Yuguang and Zheng, Liangzhen and Li, Weifeng},
+		  journal={Briefings in Bioinformatics},
+		  volume={25},
+		  number={3},
+		  pages={bbae145},
+		  year={2024},
+		  publisher={Oxford University Press}
+		}
 
 ## Usage 
 ### 1. Prepare structural files.
@@ -50,6 +49,14 @@ You can also directly run "./run_scoring.sh" to test the script. We also provide
 	-pose_fpath samples/1bcu/1bcu_decoys.sdf 
 	-model models/self-pose-ref-model.pth 
 	-out_fpath self-ref_scores.csv
+
+### 4. Create pocket graph and protein-ligand interaction graph
+	$python scripts/generate_features.py \
+	-pose_fpath samples/1bcu_decoys3.sdf \
+	-code 1bcu \
+	-rec_fpath samples/1bcu/1bcu_protein_atom_noHETATM.pdb \
+	-ref_lig_fpath samples/1bcu/1bcu_ligand.sdf \
+	-out_dpath 1bcu_features
 
 ## Question and Answer
 To be updated ...
