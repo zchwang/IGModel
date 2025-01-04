@@ -34,7 +34,6 @@ The input files include 1) protein file (".pdb"); 2) ligand file (".mol2" or ".s
 
 ### 2. If you want to specify a reference ligand structure (i.e., the cocrystal ligand of the target) to define the pocket, you can run IGModel as follows:
 	python scripts/scoring.py 
-	-prefix 1bcu
 	-rec_fpath samples/1bcu/1bcu_protein_atom_noHETATM.pdb	
 	-ref_lig_fpath samples/1bcu/1bcu_ligand.sdf
 	-pose_fpath samples/1bcu/1bcu_decoys.sdf
@@ -44,7 +43,6 @@ You can also directly run "./run_scoring.sh" to test the script. We also provide
 
 ### 3. If the co-crystal ligand of the target is unavailable, we provide an alternative version where docking poses serve as a reference to define the pocket of the target. You can run the following code to implement this:
 	python scripts/scoring.py 
-	-prefix 1bcu 
 	-rec_fpath samples/1bcu/1bcu_protein_atom_noHETATM.pdb	
 	-pose_fpath samples/1bcu/1bcu_decoys.sdf 
 	-model models/self-pose-ref-model.pth 

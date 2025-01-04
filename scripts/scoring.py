@@ -25,13 +25,13 @@ class MyDataset(Dataset):
     def __len__(self):
         return len(self.rec_gs)
 
-def scoring(prefix, pose_fpath, rec, pock_g, model, out_fpath, temp_dir):
+def scoring(pose_fpath, rec, pock_g, model, out_fpath, temp_dir):
 
     # parse poses
     if pose_fpath.endswith("sdf"):
-        poses_content = sdf_split(pose_fpath)
+        poses_names, poses_content = sdf_split(pose_fpath)
     elif pose_fpath.endswith("mol2"):
-        poses_content = mol2_split(pose_fpath)
+        poses_names, poses_content = mol2_split(pose_fpath)
     else:
         print("InputError: Please input the pose file with .sdf or .mol2 format.")
         exit()
@@ -40,7 +40,7 @@ def scoring(prefix, pose_fpath, rec, pock_g, model, out_fpath, temp_dir):
     pock_graphs = []
     for idx, p in enumerate(poses_content):
         print(idx)
-        basename = prefix + "-" + str(idx+1)
+        basename = poses_names[idx] + "-" + str(idx+1)
         if pose_fpath.endswith("sdf"):
             mol = Chem.MolFromMolBlock(p)
         elif pose_fpath.endswith("mol2"):
@@ -95,8 +95,6 @@ if __name__ == "__main__":
     d = "Generate graphs of the protein and the ligand and scoring the complex."
     parser = argparse.ArgumentParser(description=d, formatter_class=RawDescriptionHelpFormatter)
 
-    parser.add_argument("-prefix", type=str, default="receptor",
-                        help="Input. Specify a special identifier for the task.")
     parser.add_argument("-rec_fpath", type=str, default="receptor.pdb",
                         help="Input (.pdb). The path of the receptor.")
     parser.add_argument("-ref_lig_fpath", type=str, default=None,
@@ -109,7 +107,6 @@ if __name__ == "__main__":
                         help="Output. The path of the score file.")
     args = parser.parse_args()
 
-    prefix = args.prefix
     rec_fpath = args.rec_fpath
     ref_lig_fpath = args.ref_lig_fpath 
     pose_fpath = args.pose_fpath
@@ -136,6 +133,6 @@ if __name__ == "__main__":
         pock_g = None
 
     try:
-        scoring(prefix, pose_fpath, rec, pock_g, model, out_fpath, temp_dir)
+        scoring(pose_fpath, rec, pock_g, model, out_fpath, temp_dir)
     except ValueError:
         print("Error:", pose_fpath)

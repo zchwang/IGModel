@@ -136,11 +136,15 @@ sidechain_dihedral_idx_dict = {
 
 def sdf_split(infile):
     contents = open(infile, 'r').read()
-    return [c + "$$$$\n" for c in contents.split("$$$$\n")[:-1]]
+    mols = [c + "$$$$\n" for c in contents.split("$$$$\n")[:-1]]
+    names = [x.split("\n")[0] for x in mols]
+    return names, mols
 
 def mol2_split(infile):
     contents = open(infile, 'r').read()
-    return ["@<TRIPOS>MOLECULE\n" + c for c in contents.split("@<TRIPOS>MOLECULE\n")[1:]]
+    mols = ["@<TRIPOS>MOLECULE\n" + c for c in contents.split("@<TRIPOS>MOLECULE\n")[1:]]
+    names = [x.split("\n")[1] for x in mols]
+    return names, mols
 
 def generate_1d_dist(coord1, coord2):
     return torch.sqrt(torch.sum(torch.square(coord1.reshape(-1, 3) - coord2), axis=1))
